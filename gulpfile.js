@@ -18,14 +18,17 @@ gulp.task('browser-sync', function() {
 gulp.task('codecept', function() {
     var options = {flags: ' --colors --steps'};
     gulp.src(src.tests)
-       .pipe(codecept('', options));
+        .pipe(codecept('', options))
+        .pipe(browserSync.reload({stream:true}));
 });
 
-gulp.task('reload', function () {
+gulp.task('bs-reload', function () {
     browserSync.reload();
 });
 
-gulp.task('default', ['browser-sync'], function() {
-    //gulp.watch(src.tests, ['codecept']);
-    gulp.watch(src.views, ['reload', 'codecept']);
+gulp.task('watch', function() {
+    gulp.watch(src.tests, ['codecept']);
+    gulp.watch(src.views, ['bs-reload']);
 });
+
+gulp.task('default', ['watch', 'browser-sync']);
