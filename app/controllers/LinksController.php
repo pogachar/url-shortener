@@ -21,7 +21,11 @@ class LinksController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::get('url', 'hash');
+
+		$this->execute(StoreLinkCommand::class, $input);
+
+		return Redirect::back();
 	}
 
 	/**
