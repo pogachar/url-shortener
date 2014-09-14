@@ -20,6 +20,6 @@ Route::post('/', [
 	'uses'	=> 'LinksController@store'
 ]);
 Route::get('/{hash}', [
-	'as'	=> 'home',
+	'as'	=> 'hash',
 	'uses'	=> 'LinksController@show'
 ]);
