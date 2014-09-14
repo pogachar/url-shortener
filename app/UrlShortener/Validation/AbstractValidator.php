@@ -8,7 +8,7 @@ abstract class AbstractValidator {
 	/**
 	 * @var Factory
 	 */
-	private $validator;
+	protected $validator;
 
 	/**
 	 * @param Factory $validator
@@ -21,15 +21,33 @@ abstract class AbstractValidator {
 	/**
 	 * Returns true if validation passes otherwise ValidationException
 	 * @param $data
-	 * @return bool
 	 * @throws ValidationException
+	 * @internal param $data
+	 * @return bool
 	 */
 	public function isValid($data)
 	{
+		$data = $this->normalizeValidationData($data);
+
 		$validation = $this->validator->make($data, static::$rules);
 
 		if($validation->fails()) throw new ValidationException($validation->messages());
 
 		return true;
+	}
+
+	/**
+	 * Normalizes the data to array
+	 * @param $data
+	 * @return array
+	 */
+	private function normalizeValidationData($data)
+	{
+		if(is_object($data))
+		{
+			return get_object_vars($data);
+		}
+
+		return $data;
 	}
 } 

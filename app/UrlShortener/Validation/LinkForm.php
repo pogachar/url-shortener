@@ -1,6 +1,6 @@
 <?php namespace UrlShortener\Validation;
 
-class LinkValidator extends AbstractValidator {
+class LinkForm extends AbstractValidator {
 
 	/**
 	 * Link minification form rules
@@ -8,6 +8,6 @@ class LinkValidator extends AbstractValidator {
 	 */
 	protected static $rules = [
 		'url'	=> 'required|url|unique:links,url',
-		'hash'	=> 'unique:links,hash|min:3|max:10'
+		'hash'	=> 'required|unique:links,hash|max:10'
 	];
 }

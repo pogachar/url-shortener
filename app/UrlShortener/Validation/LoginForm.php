@@ -1,6 +1,6 @@
 <?php namespace UrlShortener\Validation;
 
-class LoginValidator extends AbstractValidator {
+class LoginForm extends AbstractValidator {
 
 	/**
 	 * Login form rules

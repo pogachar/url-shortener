@@ -7,6 +7,9 @@ class ValidationException extends \Exception {
 	 */
 	private $errors;
 
+	/**
+	 * @param string $errors
+	 */
 	function __construct($errors)
 	{
 		$this->errors = $errors;
@@ -16,7 +19,7 @@ class ValidationException extends \Exception {
 	 * Retrieve the validation errors
 	 * @return string
 	 */
-	public function getErrors()
+	public function getValidationErrors()
 	{
 		return $this->errors;
 	}
