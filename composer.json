@@ -10,7 +10,8 @@
 	},
     "require-dev": {
         "way/generators": "~2.6.0",
-        "codeception/codeception": "~2.0.0"
+        "codeception/codeception": "~2.0.0",
+		"laracasts/testdummy": "~1.1"
     },
 	"autoload": {
 		"classmap": [
