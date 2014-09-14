@@ -8,19 +8,13 @@ class StoreLinkCommand {
     public $url;
 
     /**
-     * @var string
-     */
-    public $hash;
-
-    /**
 	 * Store link DTO
      * @param string url
      * @param string hash
      */
-    public function __construct($url, $hash)
+    function __construct($url)
     {
         $this->url = $url;
-        $this->hash = $hash;
     }
 
 }

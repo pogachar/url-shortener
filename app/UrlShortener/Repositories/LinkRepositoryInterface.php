@@ -1,5 +1,7 @@
 <?php namespace UrlShortener\Repositories;
 
+use UrlShortener\Links\Link;
+
 interface LinkRepositoryInterface {
 
 	/**
@@ -17,9 +19,10 @@ interface LinkRepositoryInterface {
 	public function byUrl($url);
 
 	/**
-	 * Store a new link in database
-	 * @param array $data
+	 * Save a new link in database
+	 * @param Link $link
 	 * @return mixed
 	 */
-	public function create(array $data);
-} 
+	public function save(Link $link);
+
+}

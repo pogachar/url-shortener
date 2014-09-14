@@ -1,6 +1,25 @@
 <?php
 
+use UrlShortener\Exceptions\NonExistentHashException;
+use UrlShortener\Exceptions\ValidationException;
+use UrlShortener\Facades\Shorten;
+use UrlShortener\Links\StoreLinkCommand;
+use UrlShortener\Validation\LinkForm;
+
 class LinksController extends \BaseController {
+
+	/**
+	 * @var LinkValidator
+	 */
+	private $linkValidator;
+
+	/**
+	 * @param LinkForm $linkForm
+	 */
+	function __construct(LinkForm $linkForm)
+	{
+		$this->linkForm = $linkForm;
+	}
 
 	/**
 	 * Display the home page.
@@ -16,16 +35,19 @@ class LinksController extends \BaseController {
 	/**
 	 * Store a new link shortener.
 	 * POST /
-	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-		$input = Input::get('url', 'hash');
+		try {
+			$hash = $this->execute(StoreLinkCommand::class);
+		}
+		catch (ValidationException $e)
+		{
+			return Redirect::back()->withInput()->withErrors($e->getValidationErrors());
+		}
 
-		$this->execute(StoreLinkCommand::class, $input);
-
-		return Redirect::back();
+		return Redirect::home()->withHash($hash);
 	}
 
 	/**
@@ -37,7 +59,16 @@ class LinksController extends \BaseController {
 	 */
 	public function show($hash)
 	{
-		//
+		try {
+			$url = Shorten::getUrlByHash($hash);
+		}
+		catch (NonExistentHashException $e)
+		{
+			return Redirect::home()->withFlashMessage('We could not find a URL associated with that hash');
+		}
+
+		return Redirect::to($url);
+
 	}
 
 

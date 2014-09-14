@@ -40,12 +40,13 @@ class LinkRepository implements LinkRepositoryInterface {
 	}
 
 	/**
-	 * Store a new link in database
-	 * @param array $data
-	 * @return mixed
+	 * Save a new link in database
+	 * @param Link $link
+	 * @return bool|mixed
 	 */
-	public function create(array $data)
+	public function save(Link $link)
 	{
-		return $this->model->create($data);
+		return $link->save();
 	}
+
 }
