@@ -10,10 +10,6 @@
 
     {{ Form::close() }}
 
-    @if(Session::has('hash'))
-       {{ HTML::link(Session::get('hash')) }}
-    @endif
-
     @if(Session::has('flash_message'))
        {{ Session::get('flash_message') }}
     @endif

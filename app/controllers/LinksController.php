@@ -9,9 +9,9 @@ use UrlShortener\Validation\LinkForm;
 class LinksController extends \BaseController {
 
 	/**
-	 * @var LinkValidator
+	 * @var LinkForm
 	 */
-	private $linkValidator;
+	private $linkForm;
 
 	/**
 	 * @param LinkForm $linkForm
@@ -47,13 +47,12 @@ class LinksController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($e->getValidationErrors());
 		}
 
-		return Redirect::home()->withHash($hash);
+		return Redirect::home()->withFlashMessage('Here you go! ' . HTML::link($hash));
 	}
 
 	/**
 	 * Get the hash and redirect to specified url
 	 * GET /{hash}
-	 *
 	 * @param  int  $hash
 	 * @return Response
 	 */
@@ -68,7 +67,6 @@ class LinksController extends \BaseController {
 		}
 
 		return Redirect::to($url);
-
 	}
 
 
