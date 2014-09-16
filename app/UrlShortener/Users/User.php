@@ -29,4 +29,8 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $presenter = 'UrlShortener\Presenters\UserPresenter';
 
+	public function setPasswordAttributes($password)
+	{
+		$this->attributes['password'] = Hash::make($password);
+	}
 }

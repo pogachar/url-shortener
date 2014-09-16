@@ -7,10 +7,5 @@
         	{{ Form::submit('Shorten') }}
             {{ $errors->first('url', '<span class="error">:message</span>') }}
         </div>
-
     {{ Form::close() }}
-
-    @if(Session::has('flash_message'))
-       {{ Session::get('flash_message') }}
-    @endif
 @stop

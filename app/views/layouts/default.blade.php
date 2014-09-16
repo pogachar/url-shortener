@@ -9,11 +9,13 @@
 </head>
 
 <body>
-    <head>
-        <nav>
-
-        </nav>
+    <head id="header">
+        @include('layouts.partials.header')
     </head>
+
+    @if(Session::has('flash_message'))
+       {{ Session::get('flash_message') }}
+    @endif
 
     <div class="container">
         @yield('content')
