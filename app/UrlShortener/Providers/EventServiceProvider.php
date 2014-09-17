@@ -11,5 +11,6 @@ class EventServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		\Event::listen('UrlShortener.Events.LinkWasGenerated', 'UrlShortener\Validation\LinkForm@isValid');
+		\Event::listen('UrlShortener.Events.UserHasRegistered', 'UrlShortener\Validation\RegisterForm@isValid');
 	}
 }

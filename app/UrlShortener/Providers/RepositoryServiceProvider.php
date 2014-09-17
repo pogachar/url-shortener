@@ -13,5 +13,9 @@ class RepositoryServiceProvider extends ServiceProvider {
 			'UrlShortener\Repositories\LinkRepositoryInterface',
 			'UrlShortener\Repositories\Eloquent\LinkRepository'
 		);
+		$this->app->bind(
+			'UrlShortener\Repositories\UserRepositoryInterface',
+			'UrlShortener\Repositories\Eloquent\UserRepository'
+		);
 	}
 }

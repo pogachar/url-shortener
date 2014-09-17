@@ -1,42 +1,26 @@
 <?php
 
 use UrlShortener\Exceptions\ValidationException;
-use UrlShortener\Validation\LoginForm;
-use UrlShortener\Users\User;
+use UrlShortener\Users\LoginUserCommand;
 
 class SessionsController extends \BaseController {
 
 	/**
-	 * @var LoginForm
-	 */
-	private $loginForm;
-
-	function __construct(LoginForm $loginForm)
-	{
-		$this->loginForm = $loginForm;
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /sessions
+	 * Log the user in
 	 * @return Response
 	 */
 	public function store()
 	{
-		$input = Input::only('email', 'password');
-
 		try
 		{
-			$this->loginForm->isValid($input);
+			$this->execute(LoginUserCommand::class);
 		}
 		catch(ValidationException $e)
 		{
-			return Redirect::back()->withInput()->withErrors($e->getValidationErrors());
+			return Redirect::back()->withInput()->withFlashMessage('Sign in failed. Please try again.');
 		}
 
-		// Log the user in
-
-		return Redirect::home()->withFlashMessage('User logged in');
+		return Redirect::intended('/')->withFlashMessage('Welcome back');
 	}
 
 	/**

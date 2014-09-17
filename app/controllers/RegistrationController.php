@@ -1,5 +1,8 @@
 <?php
 
+use UrlShortener\Exceptions\ValidationException;
+use UrlShortener\Users\RegisterUserCommand;
+
 class RegistrationController extends \BaseController {
 
 	/**
@@ -19,7 +22,15 @@ class RegistrationController extends \BaseController {
 	 */
 	public function store()
 	{
-		// temporary
-		return Redirect::back()->withFlashMessage('User created');
+		try
+		{
+			$this->execute(RegisterUserCommand::class);
+		}
+		catch (ValidationException $e)
+		{
+			return Redirect::back()->withInput()->withErrors($e->getValidationErrors());
+		}
+
+		return Redirect::back()->withFlashMessage('Account successfully created. Validate your email before signing in.');
 	}
 }
