@@ -36,7 +36,7 @@ Route::get('logout', [
 
 Route::get('activate/{id}/{code}', [
 	'as'	=> 'account.activation',
-	'uses'	=> 'RegistrationController@getActivate'
+	'uses'	=> 'RegistrationController@activate'
 ]);
 
 /**

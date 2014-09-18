@@ -1,7 +1,9 @@
 <?php
 
 use UrlShortener\Exceptions\ValidationException;
+use UrlShortener\Users\ActivateUserCommand;
 use UrlShortener\Users\RegisterUserCommand;
+use UrlShortener\Users\User;
 use UrlShortener\Validation\RegisterForm;
 
 class RegistrationController extends \BaseController {
@@ -43,11 +45,13 @@ class RegistrationController extends \BaseController {
 
 		$this->execute(RegisterUserCommand::class);
 
-		return Redirect::back()->withFlashMessage('Account successfully created. Validate your email before signing in.');
+		return Redirect::back()->withFlashMessage('Account created successfully. Validate your email before signing in.');
 	}
 
-	public function getActivate($id, $code)
+	public function activate($id, $code)
 	{
+		$this->execute(ActivateUserCommand::class, compact('id', 'code'));
 
+		return Redirect::home()->withFlashMessage('Account activated successfully. You can now log in.');
 	}
 }
