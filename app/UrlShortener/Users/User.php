@@ -26,7 +26,7 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
-	protected $fillable = ['username', 'email', 'password', 'activated'];
+	protected $fillable = ['username', 'email', 'password', 'activated', 'activation_code'];
 
 	/**
 	 * User presenter class location
@@ -48,14 +48,14 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 	 * @param $username
 	 * @param $email
 	 * @param $password
-	 * @param $password_confirmation
+	 * @param $activation_code
 	 * @return static
 	 */
-	public function register($username, $email, $password, $password_confirmation)
+	public function register($username, $email, $password, $activation_code)
 	{
-		$user = new static(compact('username', 'email', 'password', 'password_confirmation'));
+		$user = new static(compact('username', 'email', 'password', 'activation_code'));
 
-		$user->raise(new UserHasRegistered($username, $email, $password, $password_confirmation));
+		$user->raise(new UserHasRegistered($user));
 
 		return $user;
 	}

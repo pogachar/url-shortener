@@ -34,6 +34,11 @@ Route::get('logout', [
 	'uses'	=> 'SessionsController@destroy'
 ]);
 
+Route::get('activate/{id}/{code}', [
+	'as'	=> 'account.activation',
+	'uses'	=> 'RegistrationController@getActivate'
+]);
+
 /**
  * Hash redirect page
  * must be at bottom!

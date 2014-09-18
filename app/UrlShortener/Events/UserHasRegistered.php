@@ -1,39 +1,20 @@
 <?php namespace UrlShortener\Events;
 
+use UrlShortener\Users\User;
+
 class UserHasRegistered {
 
 	/**
-	 * @var username
+	 * @var User
 	 */
-	public $username;
-
-	/**
-	 * @var
-	 */
-	public $email;
-
-	/**
-	 * @var
-	 */
-	public $password;
-
-	/**
-	 * @var
-	 */
-	public $password_confirmation;
+	public $user;
 
 	/**
 	 * DTO
-	 * @param $username
-	 * @param $email
-	 * @param $password
-	 * @param $password_confirmation
+	 * @param User $user
 	 */
-	function __construct($username, $email, $password, $password_confirmation)
+	function __construct(User $user)
 	{
-		$this->username = $username;
-		$this->email = $email;
-		$this->password = $password;
-		$this->password_confirmation = $password_confirmation;
+		$this->user = $user;
 	}
 } 

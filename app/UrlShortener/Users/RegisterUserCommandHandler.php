@@ -42,16 +42,18 @@ class RegisterUserCommandHandler implements CommandHandler {
      */
     public function handle($command)
     {
+		$activation_code = str_random(40);
+
 		$user = $this->model->register(
 			$command->username,
 			$command->email,
 			$command->password,
-			$command->password_confirmation
+			$activation_code
 		);
 
-		$this->dispatchEventsFor($user);
-
 		$this->repository->save($user);
+
+		$this->dispatchEventsFor($user);
 
 		return $user;
     }
