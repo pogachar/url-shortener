@@ -52,7 +52,7 @@ class ShortenService {
 	{
 		$link = $this->repository->byHash($hash);
 
-		if( ! $link) throw new NonExistentHashException;
+		if( ! $link) throw new NonExistentHashException('We could not find a URL associated with that hash');
 
 		return $link->url;
 	}

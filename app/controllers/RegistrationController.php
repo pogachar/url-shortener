@@ -33,14 +33,7 @@ class RegistrationController extends \BaseController {
 	 */
 	public function store()
 	{
-		try
-		{
-			$this->registerForm->isValid(Input::all());
-		}
-		catch (ValidationException $e)
-		{
-			return Redirect::back()->withInput()->withErrors($e->getValidationErrors());
-		}
+		$this->registerForm->isValid(Input::all());
 
 		$this->execute(RegisterUserCommand::class);
 

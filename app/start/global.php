@@ -50,9 +50,17 @@ App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
 });
+App::error(function(UrlShortener\Exceptions\ValidationException $exception, $code)
+{
+	return Redirect::back()->withInput()->withErrors($exception->getValidationErrors());
+});
 App::error(function(UrlShortener\Exceptions\UserLoginException $exception, $code)
 {
 	return Redirect::back()->withInput()->withExceptionMessage($exception->getMessage());
+});
+App::error(function(UrlShortener\Exceptions\NonExistentHashException $exception, $code)
+{
+	return Redirect::home()->withExceptionMessage($exception->getMessage());
 });
 
 /*

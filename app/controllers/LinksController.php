@@ -39,13 +39,7 @@ class LinksController extends \BaseController {
 	 */
 	public function store()
 	{
-		try {
-			$hash = $this->execute(StoreLinkCommand::class);
-		}
-		catch (ValidationException $e)
-		{
-			return Redirect::back()->withInput()->withErrors($e->getValidationErrors());
-		}
+		$hash = $this->execute(StoreLinkCommand::class);
 
 		return Redirect::home()->withFlashMessage('Here you go! ' . HTML::link($hash));
 	}
@@ -58,44 +52,8 @@ class LinksController extends \BaseController {
 	 */
 	public function show($hash)
 	{
-		try {
-			$url = Shorten::getUrlByHash($hash);
-		}
-		catch (NonExistentHashException $e)
-		{
-			return Redirect::home()->withFlashMessage('We could not find a URL associated with that hash');
-		}
+		$url = Shorten::getUrlByHash($hash);
 
 		return Redirect::to($url);
 	}
-
-
-
-
-
-
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /links/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /links/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 }

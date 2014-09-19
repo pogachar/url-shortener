@@ -11,14 +11,7 @@ class SessionsController extends \BaseController {
 	 */
 	public function store()
 	{
-		try
-		{
-			$this->execute(LoginUserCommand::class);
-		}
-		catch(ValidationException $e)
-		{
-			return Redirect::back()->withInput()->withErrors($e->getValidationErrors());
-		}
+		$this->execute(LoginUserCommand::class);
 
 		return Redirect::intended('/')->withFlashMessage('Welcome back');
 	}
