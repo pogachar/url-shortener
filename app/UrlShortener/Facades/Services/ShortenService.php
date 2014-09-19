@@ -9,7 +9,6 @@ class ShortenService {
 
 	use DispatchableTrait;
 
-	protected $hashLength = 6;
 	/**
 	 * @var LinkRepositoryInterface
 	 */
@@ -59,13 +58,14 @@ class ShortenService {
 
 	/**
 	 * Generates a random hash
+	 * @param int $hashLength
 	 * @return string
 	 */
-	public function generateHash()
+	public function generateHash($hashLength = 6)
 	{
 		$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-		return substr(str_shuffle(str_repeat($pool, 5)), 0, $this->hashLength);
+		return substr(str_shuffle(str_repeat($pool, 5)), 0, $hashLength);
 	}
 
 }

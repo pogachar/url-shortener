@@ -2,6 +2,7 @@
 
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
+use UrlShortener\Facades\Shorten;
 use UrlShortener\Repositories\UserRepositoryInterface;
 use UrlShortener\Validation\RegisterForm;
 
@@ -42,7 +43,7 @@ class RegisterUserCommandHandler implements CommandHandler {
      */
     public function handle($command)
     {
-		$activation_code = str_random(40);
+		$activation_code = Shorten::generateHash(40);
 
 		$user = $this->model->register(
 			$command->username,
