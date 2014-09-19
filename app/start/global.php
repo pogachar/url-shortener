@@ -50,6 +50,10 @@ App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
 });
+App::error(function(UrlShortener\Exceptions\UserLoginException $exception, $code)
+{
+	return Redirect::back()->withInput()->withExceptionMessage($exception->getMessage());
+});
 
 /*
 |--------------------------------------------------------------------------

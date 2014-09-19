@@ -17,7 +17,7 @@ class SessionsController extends \BaseController {
 		}
 		catch(ValidationException $e)
 		{
-			return Redirect::back()->withInput()->withFlashMessage('Sign in failed. Please try again.');
+			return Redirect::back()->withInput()->withErrors($e->getValidationErrors());
 		}
 
 		return Redirect::intended('/')->withFlashMessage('Welcome back');

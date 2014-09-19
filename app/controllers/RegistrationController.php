@@ -3,7 +3,6 @@
 use UrlShortener\Exceptions\ValidationException;
 use UrlShortener\Users\ActivateUserCommand;
 use UrlShortener\Users\RegisterUserCommand;
-use UrlShortener\Users\User;
 use UrlShortener\Validation\RegisterForm;
 
 class RegistrationController extends \BaseController {
@@ -45,9 +44,15 @@ class RegistrationController extends \BaseController {
 
 		$this->execute(RegisterUserCommand::class);
 
-		return Redirect::back()->withFlashMessage('Account created successfully. Validate your email before signing in.');
+		return Redirect::home()->withFlashMessage('Account created successfully. Validate your email before signing in.');
 	}
 
+	/**
+	 * Account activation from email link
+	 * @param $id
+	 * @param $code
+	 * @return mixed
+	 */
 	public function activate($id, $code)
 	{
 		$this->execute(ActivateUserCommand::class, compact('id', 'code'));

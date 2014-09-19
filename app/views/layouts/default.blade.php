@@ -9,12 +9,21 @@
 </head>
 
 <body>
+@if(Auth::check())
+    {{ 'logged in' }}
+@else
+    {{ 'not logged in' }}
+@endif
     <head id="header">
         @include('layouts.partials.header')
     </head>
 
     @if(Session::has('flash_message'))
        {{ Session::get('flash_message') }}
+    @endif
+
+    @if(Session::has('exception_message'))
+        {{ Session::get('exception_message') }}
     @endif
 
     <div class="container">

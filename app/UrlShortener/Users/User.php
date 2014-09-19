@@ -5,6 +5,7 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Laracasts\Commander\Events\EventGenerator;
+use UrlShortener\Events\UserHasLoggedIn;
 use UrlShortener\Events\UserHasRegistered;
 use Hash;
 
@@ -44,7 +45,7 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	/**
-	 * Register a new user
+	 * Register a new user Event generator
 	 * @param $username
 	 * @param $email
 	 * @param $password
@@ -56,6 +57,21 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 		$user = new static(compact('username', 'email', 'password', 'activation_code'));
 
 		$user->raise(new UserHasRegistered($user));
+
+		return $user;
+	}
+
+	/**
+	 * Login a user Event generator
+	 * @param $email
+	 * @param $password
+	 * @return static
+	 */
+	public function login($email, $password)
+	{
+		$user = new static(compact('email', 'password'));
+
+		$user->raise(new UserHasLoggedIn($email, $password));
 
 		return $user;
 	}
