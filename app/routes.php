@@ -21,6 +21,10 @@ Route::post('register', [
 	'as'	=> 'register',
 	'uses'	=> 'RegistrationController@store'
 ]);
+Route::get('activate/{id}/{code}', [
+	'as'	=> 'account.activation',
+	'uses'	=> 'RegistrationController@activate'
+]);
 
 /**
  * Sessions
@@ -34,9 +38,16 @@ Route::get('logout', [
 	'uses'	=> 'SessionsController@destroy'
 ]);
 
-Route::get('activate/{id}/{code}', [
-	'as'	=> 'account.activation',
-	'uses'	=> 'RegistrationController@activate'
+/**
+ * Logged in user routes
+ */
+Route::get('history', [
+	'as'	=> 'history',
+	'uses'	=> 'PagesController@history'
+]);
+Route::get('settings', [
+	'as'	=> 'settings',
+	'uses'	=> 'PagesController@settings'
 ]);
 
 /**

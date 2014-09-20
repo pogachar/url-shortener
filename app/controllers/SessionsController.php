@@ -13,7 +13,7 @@ class SessionsController extends \BaseController {
 	{
 		$this->execute(LoginUserCommand::class);
 
-		return Redirect::intended('/')->withFlashMessage('Welcome back');
+		return Redirect::intended('/history')->withFlashMessage('Welcome back');
 	}
 
 	/**

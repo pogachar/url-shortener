@@ -1,20 +1,22 @@
 <nav class="main-nav">
     <ul>
-        <li>{{ HTML::linkRoute('home', 'Url Shortener') }}</li>
+        @if($activeUser)
+            <li>{{ HTML::linkRoute('history', 'Url Shortener') }}</li>
+        @else
+            <li>{{ HTML::linkRoute('home', 'Url Shortener') }}</li>
+        @endif
     </ul>
 
     <ul>
-        <li>
-            {{ Form::open(['route' => 'login']) }}
-               	{{ Form::email('email', null, ['placeholder' => 'email']) }}
-               	{{ $errors->first('email', '<span class="error">:message</span>') }}
-
-               	{{ Form::password('password', ['placeholder' => 'password']) }}
-               	{{ $errors->first('password', '<span class="error">:message</span>') }}
-
-               	{{ Form::submit('Login') }}
-            {{ Form::close() }}
-        </li>
-        <li>{{ HTML::linkRoute('register', 'Register') }}</li>
+        @if($activeUser)
+            <li>You are registered as {{ $activeUser->username }}</li>
+            <li>{{ HTML::linkRoute('settings', 'Settings') }}</li>
+            <li>{{ HTML::linkRoute('logout', 'Logout') }}</li>
+        @else
+            <li>
+                @include('layouts.partials.login-form')
+            </li>
+            <li>{{ HTML::linkRoute('register', 'Register') }}</li>
+        @endif
     </ul>
 </nav>
