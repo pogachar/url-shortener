@@ -19,6 +19,11 @@ class LinkPresenter extends BasePresenter {
 		$this->link = $link;
 	}
 
+	/**
+	 * Display shortened URL
+	 * @param $link
+	 * @return string
+	 */
 	public function shortUrl($link)
 	{
 		$host = $_SERVER['HTTP_HOST'];
@@ -26,10 +31,14 @@ class LinkPresenter extends BasePresenter {
 		return \HTML::link($link->hash, $host . '/' . $link->hash);
 	}
 
+	/**
+	 * Display hostname of original link
+	 * @param $link
+	 * @return mixed
+	 */
 	public function host($link)
 	{
-		$host = parse_url($link->url, PHP_URL_HOST);
-
-		return $host;
+		return parse_url(str_replace('www.', '',$link->url), PHP_URL_HOST);
 	}
-} 
+
+}
