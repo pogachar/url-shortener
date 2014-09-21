@@ -42,12 +42,16 @@ Route::get('logout', [
  * Logged in user routes
  */
 Route::get('history', [
-	'as'	=> 'history',
+	'as'	=> 'user.history',
 	'uses'	=> 'PagesController@history'
 ]);
 Route::get('settings', [
-	'as'	=> 'settings',
+	'as'	=> 'user.settings',
 	'uses'	=> 'PagesController@settings'
+]);
+Route::put('settings', [
+	'as'	=> 'user.settings',
+	'uses'	=> 'PagesController@updateSettings'
 ]);
 
 /**

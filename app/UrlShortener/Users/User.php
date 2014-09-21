@@ -8,10 +8,11 @@ use Laracasts\Commander\Events\EventGenerator;
 use UrlShortener\Events\UserHasLoggedIn;
 use UrlShortener\Events\UserHasRegistered;
 use Hash;
+use UrlShortener\Presenters\PresentableTrait;
 
 class User extends \Eloquent implements UserInterface, RemindableInterface {
 
-	use UserTrait, RemindableTrait, EventGenerator;
+	use UserTrait, RemindableTrait, EventGenerator, PresentableTrait;
 
 	/**
 	 * The database table used by the model.
@@ -74,5 +75,13 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 		$user->raise(new UserHasLoggedIn($email, $password));
 
 		return $user;
+	}
+
+	/**
+	 * User has many links
+	 */
+	public function links()
+	{
+		return $this->hasMany('UrlShortener\Links\Link');
 	}
 }

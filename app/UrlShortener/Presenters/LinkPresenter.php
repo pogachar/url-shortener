@@ -18,4 +18,18 @@ class LinkPresenter extends BasePresenter {
 	{
 		$this->link = $link;
 	}
+
+	public function shortUrl($link)
+	{
+		$host = $_SERVER['HTTP_HOST'];
+
+		return \HTML::link($link->hash, $host . '/' . $link->hash);
+	}
+
+	public function host($link)
+	{
+		$host = parse_url($link->url, PHP_URL_HOST);
+
+		return $host;
+	}
 } 

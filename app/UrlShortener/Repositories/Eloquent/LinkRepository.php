@@ -2,13 +2,14 @@
 
 use UrlShortener\Links\Link;
 use UrlShortener\Repositories\LinkRepositoryInterface;
+use UrlShortener\Users\User;
 
 class LinkRepository implements LinkRepositoryInterface {
 
 	/**
 	 * @var User
 	 */
-	private $user;
+	private $model;
 
 	/**
 	 * Create a new Link instance
@@ -49,4 +50,13 @@ class LinkRepository implements LinkRepositoryInterface {
 		return $link->save();
 	}
 
+	/**
+	 * Retrieve all links belonging to a user
+	 * @param User $user
+	 * @return mixed
+	 */
+	public function getAllUserLinks(User $user)
+	{
+		return $user->links()->with('user')->get();
+	}
 }

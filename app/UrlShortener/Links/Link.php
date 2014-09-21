@@ -2,10 +2,11 @@
 
 use Laracasts\Commander\Events\EventGenerator;
 use UrlShortener\Events\LinkWasGenerated;
+use UrlShortener\Presenters\PresentableTrait;
 
 class Link extends \Eloquent {
 
-	use EventGenerator;
+	use EventGenerator, PresentableTrait;
 
 	protected $fillable = ['url', 'hash'];
 
@@ -28,6 +29,14 @@ class Link extends \Eloquent {
 		$link->raise(new LinkWasGenerated($url, $hash));
 
 		return $link;
+	}
+
+	/**
+	 * Link belongs to a user
+	 */
+	public function user()
+	{
+		return $this->belongsTo('UrlShortener\Users\User');
 	}
 
 }

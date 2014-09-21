@@ -1,6 +1,18 @@
 <?php
 
+use UrlShortener\Repositories\LinkRepositoryInterface;
+
 class PagesController extends \BaseController {
+
+	/**
+	 * @var LinkRepositoryInterface
+	 */
+	private $linkRepository;
+
+	function __construct(LinkRepositoryInterface $linkRepository)
+	{
+		$this->linkRepository = $linkRepository;
+	}
 
 	/**
 	 * Logged in User history page
@@ -9,7 +21,9 @@ class PagesController extends \BaseController {
 	 */
 	public function history()
 	{
-		//
+		$links = $this->linkRepository->getAllUserLinks(Auth::user());
+
+		return View::make('user.history', compact('links'));
 	}
 
 	/**
@@ -19,7 +33,14 @@ class PagesController extends \BaseController {
 	 */
 	public function settings()
 	{
-		//
+		$user = Auth::user();
+
+		return View::make('user.settings', compact('user'));
+	}
+
+	public function updateSettings($username)
+	{
+
 	}
 
 }

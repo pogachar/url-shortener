@@ -1,6 +1,7 @@
 <?php namespace UrlShortener\Repositories;
 
 use UrlShortener\Links\Link;
+use UrlShortener\Users\User;
 
 interface LinkRepositoryInterface {
 
@@ -24,5 +25,12 @@ interface LinkRepositoryInterface {
 	 * @return mixed
 	 */
 	public function save(Link $link);
+
+	/**
+	 * Retrieve all links belonging to a user
+	 * @param User $user
+	 * @return mixed
+	 */
+	public function getAllUserLinks(User $user);
 
 }
