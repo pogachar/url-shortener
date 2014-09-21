@@ -1,6 +1,5 @@
 <?php
 
-use UrlShortener\Exceptions\ValidationException;
 use UrlShortener\Users\ActivateUserCommand;
 use UrlShortener\Users\RegisterUserCommand;
 use UrlShortener\Validation\RegisterForm;

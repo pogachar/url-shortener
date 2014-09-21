@@ -62,6 +62,10 @@ App::error(function(UrlShortener\Exceptions\NonExistentHashException $exception,
 {
 	return Redirect::home()->withExceptionMessage($exception->getMessage());
 });
+App::error(function(UrlShortener\Exceptions\InvalidConfirmationCodeException $exception, $code)
+{
+	return Redirect::home();
+});
 
 /*
 |--------------------------------------------------------------------------

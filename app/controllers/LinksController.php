@@ -1,7 +1,5 @@
 <?php
 
-use UrlShortener\Exceptions\NonExistentHashException;
-use UrlShortener\Exceptions\ValidationException;
 use UrlShortener\Facades\Shorten;
 use UrlShortener\Links\StoreLinkCommand;
 use UrlShortener\Validation\LinkForm;

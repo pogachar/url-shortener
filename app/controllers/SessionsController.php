@@ -1,6 +1,5 @@
 <?php
 
-use UrlShortener\Exceptions\ValidationException;
 use UrlShortener\Users\LoginUserCommand;
 
 class SessionsController extends \BaseController {

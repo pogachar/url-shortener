@@ -1,7 +1,5 @@
 <?php namespace UrlShortener\Events;
 
-use UrlShortener\Users\User;
-
 class UserHasLoggedIn {
 
 	/**
