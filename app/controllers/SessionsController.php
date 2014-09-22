@@ -4,6 +4,10 @@ use UrlShortener\Users\LoginUserCommand;
 
 class SessionsController extends \BaseController {
 
+	function __construct()
+	{
+		$this->beforeFilter('auth', ['only' => 'destroy']);
+	}
 	/**
 	 * Log the user in
 	 * @return Response

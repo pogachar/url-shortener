@@ -12,6 +12,7 @@ class PagesController extends \BaseController {
 	function __construct(LinkRepositoryInterface $linkRepository)
 	{
 		$this->linkRepository = $linkRepository;
+		$this->beforeFilter('auth');
 	}
 
 	/**

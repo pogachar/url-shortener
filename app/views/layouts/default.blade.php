@@ -9,11 +9,6 @@
 </head>
 
 <body>
-@if(Auth::check())
-    {{ 'logged in' }}
-@else
-    {{ 'not logged in' }}
-@endif
     <head id="header">
         @include('layouts.partials.header')
     </head>

@@ -22,7 +22,5 @@
         {{ Form::password('password_confirmation', ['placeholder' => 'Password Confirmation']) }}
     </div>
 
-    <div class="form-group">
         {{ Form::submit('Register') }}
-    </div>
 {{ Form::close() }}

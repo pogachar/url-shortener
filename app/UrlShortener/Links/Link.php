@@ -8,7 +8,7 @@ class Link extends \Eloquent {
 
 	use EventGenerator, PresentableTrait;
 
-	protected $fillable = ['url', 'hash'];
+	protected $fillable = ['user_id', 'url', 'hash'];
 
 	/**
 	 * Link presenter class location

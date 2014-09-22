@@ -5,5 +5,5 @@
     {{ Form::password('password', ['placeholder' => 'password']) }}
     {{ $errors->first('password', '<span class="error">:message</span>') }}
 
-    {{ Form::submit('Login') }}
+    {{ Form::submit('Log In') }}
 {{ Form::close() }}
