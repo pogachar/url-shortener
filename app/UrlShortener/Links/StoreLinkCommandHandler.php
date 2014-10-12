@@ -35,13 +35,15 @@ class StoreLinkCommandHandler implements CommandHandler {
      * @return void
      */
     public function handle($command)
-    {
+	{
 		if($hash = Shorten::exists($command->url)) return $hash;
 
 		$hash = Shorten::generateHash();
 
+		$user_id = \Auth::user() ? \Auth::user()->id : 0;
+
 		$link = $this->model->generate(
-			$command->url, $hash
+			$user_id, $command->url, $hash
 		);
 
 		$this->dispatchEventsFor($link);

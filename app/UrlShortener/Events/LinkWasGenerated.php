@@ -5,6 +5,11 @@ class LinkWasGenerated {
 	/**
 	 * @var
 	 */
+	public $user_id;
+
+	/**
+	 * @var
+	 */
 	public $url;
 
 	/**
@@ -14,11 +19,13 @@ class LinkWasGenerated {
 
 	/**
 	 * DTO
+	 * @param $user_id
 	 * @param $url
 	 * @param $hash
 	 */
-	function __construct($url, $hash)
+	function __construct($user_id, $url, $hash)
 	{
+		$this->user_id = $user_id;
 		$this->url = $url;
 		$this->hash = $hash;
 	}

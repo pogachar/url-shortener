@@ -18,15 +18,16 @@ class Link extends \Eloquent {
 
 	/**
 	 * Generate a new link
+	 * @param $user_id
 	 * @param $url
 	 * @param $hash
 	 * @return static
 	 */
-	public function generate($url, $hash)
+	public function generate($user_id, $url, $hash)
 	{
-		$link = new static(compact('url', 'hash'));
+		$link = new static(compact('user_id', 'url', 'hash'));
 
-		$link->raise(new LinkWasGenerated($url, $hash));
+		$link->raise(new LinkWasGenerated($user_id, $url, $hash));
 
 		return $link;
 	}
